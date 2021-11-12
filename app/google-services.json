@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "302131369720",
+    "firebase_url": "https://rentmyboat-app-default-rtdb.firebaseio.com",
+    "project_id": "rentmyboat-app",
+    "storage_bucket": "rentmyboat-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:302131369720:android:c8dcec52c7562119afcd0d",
+        "android_client_info": {
+          "package_name": "com.example.mminiproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "302131369720-9ocepgf5sjc97an1l7elpjneuiuh28nb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrZsXYjoNyBAGQ0RewfrGQzmjdhnKlbgA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "302131369720-9ocepgf5sjc97an1l7elpjneuiuh28nb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
