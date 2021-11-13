@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -21,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback  {
     private DatabaseReference databaseReference;
     private Button btn_load, btn_add;
     private EditText etname, etlat, etlng;
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn_load = findViewById(R.id.btn_load);
         btn_load.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity2.class);
+            Intent intent = new Intent(this, MapsActivity.class);
             startActivity(intent);
         });
 
@@ -78,4 +80,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+
+    }
 }
