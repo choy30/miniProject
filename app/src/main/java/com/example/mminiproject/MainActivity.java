@@ -21,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private Button btn_load, btn_add;
     private EditText etname, etlat, etlng;
@@ -44,7 +44,15 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        btn_load = findViewById(R.id.btn_load);
+        btn_load.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity2.class);
+            startActivity(intent);
+        });
+
     }
+
+
     private void savePin() {
 
         Map<String, Object> map = new HashMap<>();
@@ -67,5 +75,7 @@ public class MainActivity extends AppCompatActivity{
 
                     }
                 });
-    }
+        }
+
+
 }

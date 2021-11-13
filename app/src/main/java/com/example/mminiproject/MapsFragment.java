@@ -1,9 +1,13 @@
 package com.example.mminiproject;
 
+import static java.lang.Float.parseFloat;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +18,21 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MapsFragment extends Fragment {
+
+    private ChildEventListener childEventListener;
+    private DatabaseReference databaseReference;
+    private DataSnapshot dataSnapshot;
+    Marker marker;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -31,10 +47,24 @@ public class MapsFragment extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            LatLng sydney = new LatLng(-34, 151);
-            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Pin pin = snapshot.getValue(Pin.class);
+                        LatLng latLng = new LatLng(pin.lat, pin.lng);
+                        googleMap.addMarker(new MarkerOptions().position(latLng));
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }
+
     };
 
     @Nullable
@@ -53,5 +83,8 @@ public class MapsFragment extends Fragment {
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
         }
+        ChildEventListener childEventListener;
+        databaseReference = FirebaseDatabase.getInstance().getReference("locations");
+        databaseReference.push().setValue(marker);
     }
 }
