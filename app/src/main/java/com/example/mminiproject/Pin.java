@@ -1,14 +1,24 @@
 package com.example.mminiproject;
 
 public class Pin {
-    private double lat, lng;
+    String name;
+    double lat, lng;
 
-    public Pin(double lat, double lng) {
+    public Pin() {};
+
+    public Pin(String name, double lat, double lng) {
+        this.name = name;
         this.lat = lat;
         this.lng = lng;
     }
 
-    public Pin(){};
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public double getLat() {
         return lat;
